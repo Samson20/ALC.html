@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,11 +6,13 @@ const fetch = require("node-fetch");
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Mini App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       body {
         margin: 0;
         padding: 1em;
         background-color: #fff;  
+        font-family: 'Courier New', Courier, monospace;
       }
       /*heading*/
       [data-cart-info] span {
@@ -18,10 +20,21 @@ const fetch = require("node-fetch");
         vertical-align: middle;
       }
       
-      .material-icons {
+      /*.material-icons {
         font-size: 150px;
-      }
+      }*/
       
+      .fas {
+        display: inline-block;
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: 40;
+        line-height: 1;
+        padding-right: 8px;
+        font-size: 200px;
+    
+    }
+
       /*card*/
       [data-credit-card] {
         width: 435px;
@@ -126,7 +139,7 @@ const fetch = require("node-fetch");
     <!--heading-->
     <div data-cart-info>
       <h1 class="mdc-typography--headline4">
-        <span class="material-icons">shopping_cart</span>
+        <span class="material-icons"><i class="fas fa-shopping-cart" id="shopping_cart"></i></span>
         <span data-bill></span>
       </h1>
     <!--card details-->  
@@ -134,7 +147,7 @@ const fetch = require("node-fetch");
     <div data-credit-card class="mdc-card mdc-card--outlined">
       <div class="mdc-card__primary-action">
         <img data-card-type src="https://placehold.it/120x60.png?text=Card">
-        <div data-cc-digits="">
+        <div data-cc-digits>
           <input type="text" size="4" placeholder="----" class="one">
           <input type="text" size="4" placeholder="----" class="two">
           <input type="text" size="4" placeholder="----" class="three">
@@ -152,7 +165,8 @@ const fetch = require("node-fetch");
     </button>
     <script>
       const supportedCards = {
-        visa, mastercard
+        visa: "https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg", 
+        mastercard: "https://brand.mastercard.com/content/dam/mccom/brandcenter/thumbnails/mastercard_vrt_pos_92px_2x.png"
       };
       
       const countries = [
@@ -232,7 +246,8 @@ const fetch = require("node-fetch");
         return moneyCurr;
       };
       
-      
+      //const target1 = document.querySelector("input.one");
+
       //add a line through all string in the input field if invalid
       const flagIfInvalid = (field, isValid) => {
         if(isValid == true) {
@@ -254,6 +269,7 @@ const fetch = require("node-fetch");
       const detectCardType =({target}) => {
         //assign dom elements
        const targetValue = target.value;
+       console.log(targetValue);
        const creditCard = document.querySelector('[data-credit-card]');
        const cardImage = document.querySelector('[data-card-type]'); 
         
